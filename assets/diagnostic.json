@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "title": "Data Analyst Diagnostic",
+  "questions": [
+    {
+      "id": "q1",
+      "skill": "SQL",
+      "difficulty": "easy",
+      "question": "Which SQL clause filters individual rows before any aggregation happens?",
+      "options": ["HAVING", "WHERE", "ORDER BY", "LIMIT"],
+      "answer": 1,
+      "explanation": "WHERE runs before GROUP BY and filters rows. HAVING filters groups after aggregation, which is why it can use aggregate functions and WHERE cannot."
+    },
+    {
+      "id": "q2",
+      "skill": "SQL",
+      "difficulty": "easy",
+      "question": "What does a LEFT JOIN return?",
+      "options": [
+        "Only rows that match in both tables",
+        "All rows from the left table, with NULLs where the right table has no match",
+        "All rows from the right table only",
+        "One row per matching pair, with duplicates removed"
+      ],
+      "answer": 1,
+      "explanation": "A LEFT JOIN keeps every row from the left table. Unmatched right-side columns come back as NULL. Counting the right table's key then reveals which left rows had no match."
+    },
+    {
+      "id": "q3",
+      "skill": "Communication",
+      "difficulty": "medium",
+      "question": "An interviewer asks: 'Sales dropped 10% last month — what would you investigate?' Which answer is strongest?",
+      "options": [
+        "Say you need more data and end the answer there",
+        "Clarify the metric and time period, break revenue into orders × average order value, segment by product/region/channel, and check data quality",
+        "Guess that marketing spent less money last month",
+        "Show a chart of total sales and stop at the chart"
+      ],
+      "answer": 1,
+      "explanation": "Strong case answers are structured: clarify the question, break the metric into drivers, segment to locate the change, and check data quality before recommending an action. Guessing or stopping at a chart signals weak analytical reasoning."
+    },
+    {
+      "id": "q4",
+      "skill": "Python",
+      "difficulty": "easy",
+      "question": "In pandas, which method shows column data types and non-null counts?",
+      "options": ["df.describe()", "df.info()", "df.head()", "df.shape"],
+      "answer": 1,
+      "explanation": "df.info() prints the index, column names, non-null counts, and dtypes. describe() gives summary statistics for numeric columns; shape gives only rows and columns."
+    },
+    {
+      "id": "q5",
+      "skill": "Python",
+      "difficulty": "medium",
+      "question": "Which pandas expression selects rows where amount is above 100 AND region is 'West'?",
+      "options": [
+        "df[df['amount'] > 100 & df['region'] == 'West']",
+        "df[(df['amount'] > 100) & (df['region'] == 'West')]",
+        "df.loc['amount' > 100, 'region' == 'West']",
+        "df.filter(amount > 100, region == 'West')"
+      ],
+      "answer": 1,
+      "explanation": "Each condition needs its own parentheses because the & operator binds more tightly than the comparison operators. Without parentheses, Python evaluates the comparisons in the wrong order and raises an error."
+    },
+    {
+      "id": "q6",
+      "skill": "Excel",
+      "difficulty": "easy",
+      "question": "Which Excel function finds a value in the first column of a range and returns a value from another column in the same row?",
+      "options": ["CONCATENATE", "VLOOKUP or XLOOKUP", "IFERROR", "COUNTIF"],
+      "answer": 1,
+      "explanation": "VLOOKUP searches the first column of a range and returns a value from a specified column. XLOOKUP is the modern replacement and can search in either direction."
+    },
+    {
+      "id": "q7",
+      "skill": "Excel",
+      "difficulty": "easy",
+      "question": "What does the reference $A$1 do when you copy the formula to another cell?",
+      "options": [
+        "It shifts to match the new row and column",
+        "It stays fixed on A1",
+        "It refers to a named range called A1",
+        "It converts A1 to text"
+      ],
+      "answer": 1,
+      "explanation": "The dollar signs make both the column and row absolute, so the reference does not shift when copied. $A1 fixes the column only; A$1 fixes the row only."
+    },
+    {
+      "id": "q8",
+      "skill": "Statistics",
+      "difficulty": "easy",
+      "question": "Which measure of central tendency is most affected by extreme outliers?",
+      "options": ["Median", "Mean", "Mode", "Interquartile range"],
+      "answer": 1,
+      "explanation": "The mean uses every value, so a single extreme value pulls it. The median depends on position, which makes it robust to outliers."
+    },
+    {
+      "id": "q9",
+      "skill": "Statistics",
+      "difficulty": "medium",
+      "question": "A correlation of +0.8 between ad spend and sales means:",
+      "options": [
+        "Ad spend causes 80% of sales",
+        "There is a strong positive linear association, but it is not proof of causation",
+        "80% of customers saw the ad",
+        "Sales will always rise by 0.8 when spend rises by 1"
+      ],
+      "answer": 1,
+      "explanation": "Correlation measures the strength and direction of a linear relationship, not causation. A hidden variable, reverse causation, or coincidence could explain the pattern; proving causation needs an experiment or stronger causal design."
+    },
+    {
+      "id": "q10",
+      "skill": "Power BI",
+      "difficulty": "medium",
+      "question": "What is the main job of CALCULATE in DAX?",
+      "options": [
+        "Create a relationship between two tables",
+        "Evaluate an expression in a modified filter context",
+        "Sort a visual",
+        "Import data from Excel"
+      ],
+      "answer": 1,
+      "explanation": "CALCULATE evaluates an expression after changing the filter context, for example removing a slicer filter with ALL or adding a condition with FILTER. It is the core of most non-trivial DAX measures."
+    },
+    {
+      "id": "q11",
+      "skill": "Power BI",
+      "difficulty": "easy",
+      "question": "Which visual is best for showing how a metric changes over 24 months?",
+      "options": ["Pie chart", "Line chart", "Scatter plot", "Table"],
+      "answer": 1,
+      "explanation": "A line chart encodes time on the x-axis and makes trend and seasonality easy to read. Pie charts are for parts of a whole, scatter plots for relationships between two measures, and tables for detail."
+    },
+    {
+      "id": "q12",
+      "skill": "Communication",
+      "difficulty": "medium",
+      "question": "Revenue is down 20% but order count is flat. What should you check first?",
+      "options": [
+        "Nothing — revenue and orders should always move together",
+        "Average order value and product mix, because price or mix likely changed",
+        "The dashboard color theme",
+        "Delete the dashboard and rebuild it"
+      ],
+      "answer": 1,
+      "explanation": "Revenue = orders x average order value. If orders are flat, the drop must come from price, discounting, or mix shifting toward cheaper products. Breaking revenue into those components is the fastest way to find the driver."
+    }
+  ]
+}

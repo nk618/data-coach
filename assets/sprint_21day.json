@@ -1,0 +1,737 @@
+{
+  "version": 1,
+  "title": "21-Day Data Analyst Sprint",
+  "description": "A 3-week sprint for someone with some basics to become interview-ready: SQL, data cleaning, two portfolio projects, Power BI, and interview practice.",
+  "weeks": [
+    {
+      "week": 1,
+      "theme": "Foundations & Project 1 — E-commerce",
+      "focus": "SQL fundamentals, data understanding, cleaning, EDA, and a first Power BI dashboard."
+    },
+    {
+      "week": 2,
+      "theme": "Depth & Project 2 — HR analytics",
+      "focus": "Advanced SQL, statistics, DAX, a second dashboard, and harder interview drills."
+    },
+    {
+      "week": 3,
+      "theme": "Interview & job readiness",
+      "focus": "Case study, resume, behavioral stories, daily mocks, and applications."
+    }
+  ],
+  "days": [
+    {
+      "day": 1,
+      "week": 1,
+      "theme": "Setup & the data landscape",
+      "goal": "Understand how a data analyst works end to end and get your first dataset ready.",
+      "deliverable": "Dataset downloaded, tables inventoried, and a Project 1 README started.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "How a data analyst works end to end",
+          "details": "Read the intro of Mode's SQL tutorial and learn the workflow: business question → data → cleaning → analysis → visual → recommendation. Install Power BI Desktop while you read.",
+          "minutes": 45,
+          "resource_label": "Mode SQL tutorial",
+          "resource_url": "https://mode.com/sql-tutorial/"
+        },
+        {
+          "type": "build",
+          "title": "Download and inventory the Olist dataset",
+          "details": "Download the Brazilian E-Commerce dataset (free Kaggle account required). Unzip it, open each CSV, and record the row count, column count, and what one row represents.",
+          "minutes": 90,
+          "resource_label": "Olist dataset on Kaggle",
+          "resource_url": "https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce"
+        },
+        {
+          "type": "prove",
+          "title": "Write the business context",
+          "details": "In five sentences: who Olist is, what a row in the orders table represents, and one decision this data could inform. Send it to the coach for feedback.",
+          "minutes": 30
+        },
+        {
+          "type": "log",
+          "title": "Set up your project workspace",
+          "details": "Create a GitHub repository named data-analyst-portfolio. Add a project-1-olist folder and a README containing your business context.",
+          "minutes": 15,
+          "resource_label": "GitHub",
+          "resource_url": "https://github.com/"
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "week": 1,
+      "theme": "SQL fundamentals on real questions",
+      "goal": "Write working SQL against the Olist data and understand how joins change the answer.",
+      "deliverable": "queries_day2.sql with 8 working queries.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "SQL fundamentals",
+          "details": "SELECT, WHERE, ORDER BY, GROUP BY, HAVING, and INNER/LEFT JOIN. Work through SQLBolt lessons 1–6.",
+          "minutes": 60,
+          "resource_label": "SQLBolt",
+          "resource_url": "https://sqlbolt.com/"
+        },
+        {
+          "type": "build",
+          "title": "Answer 8 business questions in SQL",
+          "details": "Use DuckDB or DB Browser for SQLite. Queries: monthly order counts; top 10 categories by revenue; orders by state; average review score by category; delivery time trend; payment type split; top sellers; late-delivery rate.",
+          "minutes": 90
+        },
+        {
+          "type": "prove",
+          "title": "Explain your joins",
+          "details": "Explain INNER vs LEFT JOIN in your own words and show one query where choosing the wrong join would change the answer.",
+          "minutes": 30
+        },
+        {
+          "type": "log",
+          "title": "Save your query file",
+          "details": "Create queries_day2.sql with all eight queries and a one-line comment above each explaining the business question.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "week": 1,
+      "theme": "Data understanding",
+      "goal": "Profile every table and identify the quality traps before you analyze anything.",
+      "deliverable": "Data dictionary, data-quality risk list, and a one-page understanding brief.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "The data profiling checklist",
+          "details": "Learn to check grain, keys, data types, missingness, duplicates, value ranges, cardinality, and time coverage before analysis.",
+          "minutes": 45
+        },
+        {
+          "type": "build",
+          "title": "Profile all nine tables",
+          "details": "For each table: row count, column types, missing percentage, duplicates, and min/max dates. Build a data dictionary for orders, order_items, and customers.",
+          "minutes": 90
+        },
+        {
+          "type": "prove",
+          "title": "Find the traps",
+          "details": "List five data-quality risks, such as missing delivery dates or duplicate reviews, and explain how each could distort an insight.",
+          "minutes": 30
+        },
+        {
+          "type": "log",
+          "title": "Write the data understanding brief",
+          "details": "One page covering what the data describes, its grain, the main quality risks, and five business questions worth answering.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 4,
+      "week": 1,
+      "theme": "Data cleaning",
+      "goal": "Clean the core tables with decisions you can defend in an interview.",
+      "deliverable": "Cleaned dataset plus a cleaning log with before/after validations.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "Cleaning decisions that survive review",
+          "details": "Missing-data strategies, duplicate handling, type and date parsing, outlier flags, and referential integrity. Every change needs a reason and a validation.",
+          "minutes": 45
+        },
+        {
+          "type": "build",
+          "title": "Clean the core tables",
+          "details": "Parse timestamps, handle missing delivery dates, deduplicate rows, validate keys across tables, and flag price or freight outliers. Keep the raw files untouched.",
+          "minutes": 90
+        },
+        {
+          "type": "prove",
+          "title": "Validate before and after",
+          "details": "Record row counts before and after cleaning, then run three checks: unique order IDs, valid foreign keys, and correct date ordering.",
+          "minutes": 30
+        },
+        {
+          "type": "log",
+          "title": "Write the cleaning log",
+          "details": "Create a table of decision → reason → validation result. This is a portfolio artifact interviewers genuinely value.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 5,
+      "week": 1,
+      "theme": "EDA and insights",
+      "goal": "Turn charts into evidence-backed business insights.",
+      "deliverable": "Six charts plus eight insight bullets.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "EDA that produces insights, not charts",
+          "details": "Use the workflow univariate → bivariate → time → segments. Write insights as observation → evidence → implication.",
+          "minutes": 45
+        },
+        {
+          "type": "build",
+          "title": "Analyze revenue, customers, and delivery",
+          "details": "Explore revenue trend, average order value, top categories, regional differences, delivery performance, and review scores. Build six clear charts.",
+          "minutes": 90
+        },
+        {
+          "type": "prove",
+          "title": "Write eight insight bullets",
+          "details": "Each bullet must cite a number and end with why the business should care. Send them to the coach for critique.",
+          "minutes": 30
+        },
+        {
+          "type": "log",
+          "title": "Choose your dashboard story",
+          "details": "Pick the three strongest insights and decide the one message your dashboard should prove.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 6,
+      "week": 1,
+      "theme": "Power BI build",
+      "goal": "Get a working, reconciled first dashboard page.",
+      "deliverable": "project1_v1.pbix with a working first page.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "Power BI essentials",
+          "details": "Import CSVs, build relationships, create card/bar/line/map visuals, add slicers, and write basic DAX: SUM, DIVIDE, DISTINCTCOUNT, CALCULATE.",
+          "minutes": 60,
+          "resource_label": "Microsoft Learn: Power BI",
+          "resource_url": "https://learn.microsoft.com/en-us/power-bi/"
+        },
+        {
+          "type": "build",
+          "title": "Build dashboard page 1",
+          "details": "KPIs: revenue, orders, average order value, on-time percentage. Visuals: revenue trend, top categories, regional map. Add date, state, and category slicers. Verify the model relationships.",
+          "minutes": 120
+        },
+        {
+          "type": "prove",
+          "title": "Reconcile every number",
+          "details": "Compare each KPI to a SQL query. Document any difference and fix it before moving on. Numbers that disagree destroy trust.",
+          "minutes": 30
+        },
+        {
+          "type": "log",
+          "title": "Capture what confused you",
+          "details": "Screenshot the dashboard and note three confusing Power BI behaviors to ask the coach about tomorrow.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 7,
+      "week": 1,
+      "theme": "Polish, publish, first mock",
+      "goal": "Publish Project 1 and get your first honest interview score.",
+      "deliverable": "Project 1 published plus first mock interview report.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "Dashboard design basics",
+          "details": "Action titles, visual hierarchy, clutter removal, consistent color, accessible labels, and one message per page.",
+          "minutes": 30,
+          "resource_label": "Power BI visualization best practices",
+          "resource_url": "https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-best-practices"
+        },
+        {
+          "type": "build",
+          "title": "Polish and package",
+          "details": "Fix layout and labels, add an insight title, tooltips, and a data date stamp. Export a PNG screenshot for the README.",
+          "minutes": 90
+        },
+        {
+          "type": "prove",
+          "title": "Mock interview #1",
+          "details": "Ask the coach for a 30-minute mock covering SQL basics, behavioral questions, and a dashboard walkthrough. Score honestly and save the report.",
+          "minutes": 60
+        },
+        {
+          "type": "log",
+          "title": "Publish Project 1",
+          "details": "README: problem, data, method, three insights, dashboard image, and tools. Push to GitHub and add the link to your portfolio index page.",
+          "minutes": 30
+        }
+      ]
+    },
+    {
+      "day": 8,
+      "week": 2,
+      "theme": "Advanced SQL",
+      "goal": "Master the window-function patterns that analyst interviews actually test.",
+      "deliverable": "Eight advanced queries, a drill score, and a one-page pattern sheet.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "Advanced SQL patterns",
+          "details": "CTEs, subqueries, ROW_NUMBER, RANK, LAG/LEAD, and running totals. These are the patterns most analyst interviews test.",
+          "minutes": 60
+        },
+        {
+          "type": "build",
+          "title": "Write eight advanced queries",
+          "details": "On Olist: month-over-month revenue growth with LAG, category rank per month, cumulative revenue, first and last order per customer, repeat-purchase rate, RFM basics, delivery SLA buckets, and seller ranking.",
+          "minutes": 90
+        },
+        {
+          "type": "prove",
+          "title": "Timed SQL drill",
+          "details": "Five questions in 25 minutes with no hints. Log every mistake with the correct pattern.",
+          "minutes": 30
+        },
+        {
+          "type": "log",
+          "title": "Build a pattern cheat sheet",
+          "details": "One page of window-function templates you can reproduce from memory: ranking, running total, month-over-month, first/last value.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 9,
+      "week": 2,
+      "theme": "Statistics for analysts",
+      "goal": "Use statistics to judge whether a finding is real and worth acting on.",
+      "deliverable": "Applied stats analysis plus a one-page cheat sheet.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "Statistics that interviewers ask about",
+          "details": "Descriptive statistics, distributions, standard deviation, correlation vs causation, sampling, confidence intervals, A/B test intuition, and p-values.",
+          "minutes": 60,
+          "resource_label": "StatQuest",
+          "resource_url": "https://www.youtube.com/@statquest"
+        },
+        {
+          "type": "build",
+          "title": "Apply stats to Olist",
+          "details": "Examine the distribution of order values, the correlation between review score and delivery delay, and segment comparisons with confidence intervals.",
+          "minutes": 60
+        },
+        {
+          "type": "prove",
+          "title": "Stats quiz and a causation story",
+          "details": "Take the coach's quiz, then explain why one correlation you found is not causation and what evidence would be needed.",
+          "minutes": 60
+        },
+        {
+          "type": "log",
+          "title": "Write your stats cheat sheet",
+          "details": "Define mean, median, standard deviation, confidence interval, and p-value in your own words with a business example for each.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 10,
+      "week": 2,
+      "theme": "Project 2 kickoff — HR attrition",
+      "goal": "Define the HR business problem and the metrics before touching a dashboard.",
+      "deliverable": "HR data brief plus metric definitions.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "HR analytics context",
+          "details": "Learn attrition, headcount, tenure, and the cost of turnover. Understand the questions HR leaders actually ask.",
+          "minutes": 45
+        },
+        {
+          "type": "build",
+          "title": "Profile the IBM HR dataset",
+          "details": "Download the dataset, define the grain, build a data dictionary, calculate the baseline attrition rate, and list five quality issues such as constant columns or small groups.",
+          "minutes": 90,
+          "resource_label": "IBM HR attrition dataset",
+          "resource_url": "https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset"
+        },
+        {
+          "type": "prove",
+          "title": "Define five business questions",
+          "details": "For each: the metric, the denominator, and the decision it informs. Bad denominators are a classic interview trap.",
+          "minutes": 30
+        },
+        {
+          "type": "log",
+          "title": "Write data brief v2",
+          "details": "Repeat the Day 3 brief structure for HR. Note how the grain and quality issues differ from e-commerce.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 11,
+      "week": 2,
+      "theme": "HR cleaning and SQL analysis",
+      "goal": "Find the real drivers of attrition without misleading denominators.",
+      "deliverable": "Analysis queries plus six evidence-backed insights.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "Metric guardrails",
+          "details": "Denominators, small-sample groups, Simpson's paradox, and why attrition by gender can mislead without controlling for role.",
+          "minutes": 30
+        },
+        {
+          "type": "build",
+          "title": "Analyze attrition drivers",
+          "details": "Attrition by department, role, tenure band, overtime, gender, and satisfaction. Use window functions for percentage of total.",
+          "minutes": 120
+        },
+        {
+          "type": "prove",
+          "title": "Manual spot-checks",
+          "details": "Verify three numbers by hand. Explain any segment with fewer than 30 employees that you decide not to highlight.",
+          "minutes": 30
+        },
+        {
+          "type": "log",
+          "title": "Write six insights",
+          "details": "Observation → evidence → implication. Flag which findings are correlational and which need more data.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 12,
+      "week": 2,
+      "theme": "Power BI Project 2 and DAX",
+      "goal": "Build an HR dashboard with measures you can explain under pressure.",
+      "deliverable": "project2_v1.pbix with two pages.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "DAX for real dashboards",
+          "details": "CALCULATE, FILTER, ALL, DIVIDE, time intelligence, and measure vs calculated column. Focus on filter context.",
+          "minutes": 60,
+          "resource_label": "Microsoft Learn: DAX",
+          "resource_url": "https://learn.microsoft.com/en-us/dax/"
+        },
+        {
+          "type": "build",
+          "title": "Build the HR dashboard",
+          "details": "Page 1: headcount, attrition percentage, department breakdown. Page 2: drivers — overtime, tenure, satisfaction. Add slicers and five measures.",
+          "minutes": 120
+        },
+        {
+          "type": "prove",
+          "title": "Explain filter context",
+          "details": "Pick three measures and explain what each calculates and how slicers change it. Verify totals against SQL.",
+          "minutes": 30
+        },
+        {
+          "type": "log",
+          "title": "Save DAX patterns",
+          "details": "Note the five measures with their DAX and when to reuse each pattern.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 13,
+      "week": 2,
+      "theme": "Storytelling and design review",
+      "goal": "Make both dashboards answer a business question, not just display data.",
+      "deliverable": "Polished dashboards plus fixes from mock feedback.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "Dashboard storytelling",
+          "details": "Audience, one message per page, action titles, annotation, color semantics, and executive summaries.",
+          "minutes": 45
+        },
+        {
+          "type": "build",
+          "title": "Revise both dashboards",
+          "details": "Add action titles, annotations, and an executive summary page for Projects 1 and 2. Remove anything that does not support the message.",
+          "minutes": 90
+        },
+        {
+          "type": "prove",
+          "title": "Mock interview #2",
+          "details": "Ten-minute dashboard walkthrough plus one case question. Get scored on insight, structure, and design.",
+          "minutes": 60
+        },
+        {
+          "type": "log",
+          "title": "Apply the feedback",
+          "details": "Fix the top three issues from the mock before moving on.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 14,
+      "week": 2,
+      "theme": "Publish Project 2 and review",
+      "goal": "Ship the second project and update your skill picture honestly.",
+      "deliverable": "Project 2 published plus an updated skill self-assessment.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "Portfolio READMEs that get interviews",
+          "details": "Problem → data → method → insights → recommendation → what you would do next. Include images and links.",
+          "minutes": 30
+        },
+        {
+          "type": "build",
+          "title": "Publish Project 2",
+          "details": "Finalize the README, add dashboard screenshots, push to GitHub, and add it to your portfolio index page.",
+          "minutes": 90
+        },
+        {
+          "type": "prove",
+          "title": "Mock interview #3",
+          "details": "SQL plus Python/pandas for 30 minutes. Review every missed question and update your skill levels.",
+          "minutes": 60
+        },
+        {
+          "type": "log",
+          "title": "Week 2 retrospective",
+          "details": "Score your skills 1–5 again, list your three biggest gaps, and adjust next week's focus with the coach.",
+          "minutes": 30
+        }
+      ]
+    },
+    {
+      "day": 15,
+      "week": 3,
+      "theme": "Finance mini case",
+      "goal": "Structure and present a business case in five minutes.",
+      "deliverable": "One-page finance case plus a five-minute presentation.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "Case interview structure",
+          "details": "Clarify → structure → analyze → recommend. Practice stating assumptions out loud.",
+          "minutes": 30
+        },
+        {
+          "type": "build",
+          "title": "Finance mini case",
+          "details": "Use the UCI Bank Marketing dataset. Define the campaign problem, clean the data, analyze conversion by segment, and write three recommendations.",
+          "minutes": 90,
+          "resource_label": "UCI Bank Marketing dataset",
+          "resource_url": "https://archive.ics.uci.edu/dataset/222/bank+marketing"
+        },
+        {
+          "type": "prove",
+          "title": "Present the case in five minutes",
+          "details": "Business problem, approach, three findings, recommendation. Get feedback on structure, not just the answer.",
+          "minutes": 30
+        },
+        {
+          "type": "log",
+          "title": "Write the one-page case",
+          "details": "One page you can paste into your portfolio or discuss in an interview.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 16,
+      "week": 3,
+      "theme": "Resume, LinkedIn, GitHub",
+      "goal": "Turn your work into a profile that gets callbacks.",
+      "deliverable": "Resume v2, updated LinkedIn, and GitHub profile README.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "The analyst resume",
+          "details": "Impact bullets: action + method + result. Mirror keywords from job ads. Keep it one page and ATS-friendly.",
+          "minutes": 30
+        },
+        {
+          "type": "build",
+          "title": "Rewrite resume, LinkedIn, and GitHub",
+          "details": "Add both projects with metrics. Update your headline, about section, skills, and GitHub profile README.",
+          "minutes": 120
+        },
+        {
+          "type": "prove",
+          "title": "Resume critique",
+          "details": "Paste three real job descriptions and your resume for the coach to critique against them.",
+          "minutes": 30
+        },
+        {
+          "type": "log",
+          "title": "Save target roles",
+          "details": "Collect five to ten job descriptions you will actually apply to and note the recurring requirements.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 17,
+      "week": 3,
+      "theme": "SQL and Python drills",
+      "goal": "Build speed and accuracy under interview conditions.",
+      "deliverable": "Drill scores plus an error log.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "Interview SQL patterns",
+          "details": "Aggregation, joins, deduplication, gaps and islands, ranking, and date math. Know the pandas equivalent of each.",
+          "minutes": 30
+        },
+        {
+          "type": "build",
+          "title": "Ten timed SQL and five pandas questions",
+          "details": "45 minutes total, no hints. Score yourself honestly.",
+          "minutes": 90
+        },
+        {
+          "type": "prove",
+          "title": "Mock interview #4",
+          "details": "SQL-heavy mock for 30 minutes. Think out loud and explain trade-offs.",
+          "minutes": 60
+        },
+        {
+          "type": "log",
+          "title": "Build an error log",
+          "details": "Every mistake, the correct pattern, and the tell that would signal it next time.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 18,
+      "week": 3,
+      "theme": "Behavioral interviews",
+      "goal": "Have eight specific, metric-backed stories ready.",
+      "deliverable": "Eight polished STAR stories.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "STAR stories",
+          "details": "Eight stories: conflict, failure, ambiguity, deadline, stakeholder, learning, impact, and teamwork. Each 60–90 seconds with a metric.",
+          "minutes": 45
+        },
+        {
+          "type": "build",
+          "title": "Write and rehearse eight stories",
+          "details": "Draft each story, then say it out loud twice. Cut anything that does not set up the action or result.",
+          "minutes": 90
+        },
+        {
+          "type": "prove",
+          "title": "HR mock interview #5",
+          "details": "Behavioral interview scored on structure, clarity, ownership, and specificity.",
+          "minutes": 60
+        },
+        {
+          "type": "log",
+          "title": "Fix your two weakest stories",
+          "details": "Rewrite them with a clearer stake, action, and measurable result.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 19,
+      "week": 3,
+      "theme": "Full panel mock",
+      "goal": "Perform under realistic pressure and find the remaining gaps.",
+      "deliverable": "Panel scorecard plus a gap plan.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "Panel interview strategy",
+          "details": "Listen, structure, think aloud, handle unknowns, and ask good questions at the end.",
+          "minutes": 30
+        },
+        {
+          "type": "build",
+          "title": "Rehearse project walkthroughs",
+          "details": "Two minutes each for Project 1, Project 2, and the finance case. Record yourself if you can.",
+          "minutes": 60
+        },
+        {
+          "type": "prove",
+          "title": "Full panel mock #6",
+          "details": "Technical, case, and behavioral questions for 45 minutes, scored across all competencies.",
+          "minutes": 90
+        },
+        {
+          "type": "log",
+          "title": "Gap plan",
+          "details": "Identify the three lowest scores and schedule targeted practice before Day 20.",
+          "minutes": 30
+        }
+      ]
+    },
+    {
+      "day": 20,
+      "week": 3,
+      "theme": "Applications sprint",
+      "goal": "Turn preparation into actual applications.",
+      "deliverable": "10–15 applications logged plus mock #7.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "Applications that get read",
+          "details": "Tailoring, cover-note templates, recruiter outreach, referral asks, and a simple application tracker.",
+          "minutes": 30
+        },
+        {
+          "type": "build",
+          "title": "Apply to 10–15 roles",
+          "details": "Tailor your resume summary and two bullets per role. Log every application with date and follow-up.",
+          "minutes": 120
+        },
+        {
+          "type": "prove",
+          "title": "Rapid-fire mock #7",
+          "details": "20 minutes of SQL and behavioral questions with short answers. Aim for clarity under pressure.",
+          "minutes": 60
+        },
+        {
+          "type": "log",
+          "title": "Update the tracker",
+          "details": "Add follow-up dates and set reminders for five to seven days out.",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "day": 21,
+      "week": 3,
+      "theme": "Final review and next 30 days",
+      "goal": "Measure your improvement and leave with a concrete job-search plan.",
+      "deliverable": "Final report card plus a 30-day plan.",
+      "tasks": [
+        {
+          "type": "learn",
+          "title": "Negotiation and follow-up",
+          "details": "How to discuss salary, ask for feedback after rejection, and follow up without nagging.",
+          "minutes": 30
+        },
+        {
+          "type": "build",
+          "title": "Final portfolio pass",
+          "details": "Fix the top three issues a hiring manager would notice: broken links, unclear insights, or missing business context.",
+          "minutes": 60
+        },
+        {
+          "type": "prove",
+          "title": "Final mock #8",
+          "details": "Full panel. Compare your scorecard with Day 7 to see the improvement.",
+          "minutes": 90
+        },
+        {
+          "type": "log",
+          "title": "Write your 30-day plan",
+          "details": "Applications per week, one weak skill to deepen, one new project idea, and how you will keep practicing.",
+          "minutes": 45
+        }
+      ]
+    }
+  ]
+}
