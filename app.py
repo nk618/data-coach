@@ -13,14 +13,16 @@ st.set_page_config(
 
 from core import config, db, roadmap  # noqa: E402
 from ui import onboarding  # noqa: E402
-from ui.pages import coach, placeholders, progress, settings, today  # noqa: E402
+from ui.pages import coach, dashboard_coach, data_lab, interview_room, job_tracker, progress, settings, today  # noqa: E402
 from ui.styles import inject_css  # noqa: E402
 
 NAV = [
     ("Today", "🏠  Today"),
     ("Coach", "💬  Coach"),
-    ("Data Lab", "🧪  Data Lab · soon"),
-    ("Interview Room", "🎯  Interview Room · soon"),
+    ("Data Lab", "🧪  Data Lab"),
+    ("Interview Room", "🎯  Interview Room"),
+    ("Dashboard Coach", "📊  Dashboard Coach"),
+    ("Job Tracker", "🗂️  Job Tracker"),
     ("Progress", "📈  Progress"),
     ("Settings", "⚙️  Settings"),
 ]
@@ -28,8 +30,10 @@ NAV = [
 PAGES = {
     "Today": today.render,
     "Coach": coach.render,
-    "Data Lab": placeholders.data_lab,
-    "Interview Room": placeholders.interview_room,
+    "Data Lab": data_lab.render,
+    "Interview Room": interview_room.render,
+    "Dashboard Coach": dashboard_coach.render,
+    "Job Tracker": job_tracker.render,
     "Progress": progress.render,
     "Settings": settings.render,
 }

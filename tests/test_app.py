@@ -63,6 +63,8 @@ class AppSmokeTests(unittest.TestCase):
             "Coach",
             "Data Lab",
             "Interview Room",
+            "Dashboard Coach",
+            "Job Tracker",
             "Progress",
             "Settings",
         ]:

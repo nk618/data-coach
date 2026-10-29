@@ -74,6 +74,22 @@ CREATE TABLE IF NOT EXISTS settings (
     key TEXT PRIMARY KEY,
     value TEXT
 );
+
+CREATE TABLE IF NOT EXISTS applications (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    company TEXT NOT NULL,
+    role TEXT NOT NULL,
+    date_applied TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'Applied',
+    source TEXT NOT NULL DEFAULT '',
+    notes TEXT NOT NULL DEFAULT '',
+    follow_up_date TEXT,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_applications_status ON applications(status);
+CREATE INDEX IF NOT EXISTS idx_applications_date ON applications(date_applied);
 """
 
 
@@ -427,6 +443,134 @@ def set_setting(key: str, value: str) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Job applications
+# ---------------------------------------------------------------------------
+APPLICATION_STATUSES = [
+    "Applied",
+    "Screening",
+    "Interview",
+    "Offer",
+    "Rejected",
+    "Withdrawn",
+]
+
+
+def add_application(
+    company: str,
+    role: str,
+    date_applied: str,
+    status: str = "Applied",
+    source: str = "",
+    notes: str = "",
+    follow_up_date: str | None = None,
+) -> int:
+    now = _now()
+    with connection() as conn:
+        cursor = conn.execute(
+            """
+            INSERT INTO applications
+                (company, role, date_applied, status, source, notes,
+                 follow_up_date, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                company.strip(),
+                role.strip(),
+                date_applied,
+                status,
+                source.strip(),
+                notes.strip(),
+                follow_up_date,
+                now,
+                now,
+            ),
+        )
+        return int(cursor.lastrowid)
+
+
+def update_application(
+    application_id: int,
+    company: str,
+    role: str,
+    date_applied: str,
+    status: str,
+    source: str = "",
+    notes: str = "",
+    follow_up_date: str | None = None,
+) -> None:
+    with connection() as conn:
+        conn.execute(
+            """            UPDATE applications
+            SET company = ?, role = ?, date_applied = ?, status = ?,
+                source = ?, notes = ?, follow_up_date = ?, updated_at = ?
+            WHERE id = ?
+            """,
+            (
+                company.strip(),
+                role.strip(),
+                date_applied,
+                status,
+                source.strip(),
+                notes.strip(),
+                follow_up_date,
+                _now(),
+                int(application_id),
+            ),
+        )
+
+
+def delete_application(application_id: int) -> None:
+    with connection() as conn:
+        conn.execute("DELETE FROM applications WHERE id = ?", (int(application_id),))
+
+
+def get_application(application_id: int) -> dict[str, Any] | None:
+    with connection() as conn:
+        row = conn.execute(
+            "SELECT * FROM applications WHERE id = ?", (int(application_id),)
+        ).fetchone()
+    return dict(row) if row else None
+
+
+def get_applications(status: str | None = None) -> list[dict[str, Any]]:
+    with connection() as conn:
+        if status:
+            rows = conn.execute(
+                "SELECT * FROM applications WHERE status = ? ORDER BY date_applied DESC, id DESC",
+                (status,),
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                "SELECT * FROM applications ORDER BY date_applied DESC, id DESC"
+            ).fetchall()
+    return [dict(r) for r in rows]
+
+
+def get_application_stats() -> dict[str, Any]:
+    with connection() as conn:
+        total = conn.execute("SELECT COUNT(*) AS c FROM applications").fetchone()["c"]
+        by_status = conn.execute(
+            "SELECT status, COUNT(*) AS c FROM applications GROUP BY status"
+        ).fetchall()
+        recent = conn.execute(
+            "SELECT COUNT(*) AS c FROM applications WHERE date_applied >= date('now', '-7 days')"
+        ).fetchone()["c"]
+        follow_ups = conn.execute(
+            """
+            SELECT COUNT(*) AS c FROM applications
+            WHERE follow_up_date IS NOT NULL AND follow_up_date != ''
+              AND follow_up_date <= date('now')
+            """
+        ).fetchone()["c"]
+    return {
+        "total": int(total or 0),
+        "by_status": {row["status"]: int(row["c"]) for row in by_status},
+        "recent": int(recent or 0),
+        "follow_ups_due": int(follow_ups or 0),
+    }
+
+
+# ---------------------------------------------------------------------------
 # Reset
 # ---------------------------------------------------------------------------
 def reset_all() -> None:
@@ -439,5 +583,6 @@ def reset_all() -> None:
             "skills",
             "profile",
             "settings",
+            "applications",
         ):
             conn.execute(f"DELETE FROM {table}")

@@ -65,14 +65,14 @@ powershell -ExecutionPolicy Bypass -File .\create_shortcut.ps1
   WebView2 is unavailable.
 - **Standalone build** — `DataCoach.exe` bundles the runtime, Streamlit, and the window shell, so
   it runs on a clean Windows PC without Python installed.
-
-Coming next:
-
-- **Phase 2 — Data Lab:** upload CSV/Excel, auto-profile, cleaning checklist, pandas/SQL code,
-  sandboxed query runner, export.
-- **Phase 3 — Interview Room:** timed mock interviews, live SQL checking, scored report cards.
-- **Phase 4 — Dashboard Coach:** KPI/chart guidance, DAX help, screenshot critique.
-- **Phase 5 — Job tracker:** application log, follow-up reminders, and interview calendar.
+- **Data Lab** — upload CSV/Excel, auto-profile, cleaning checklist with pandas code, sandboxed
+  SQL queries via DuckDB, and export of cleaned data.
+- **Interview Room** — configurable timed mock interviews (focus, difficulty, length) with
+  one-question-at-a-time flow and a scored report card.
+- **Dashboard Coach** — turn business questions into KPIs, charts, and DAX; upload a screenshot
+  for a scored critique.
+- **Job tracker** — log applications, track pipeline status, follow-up reminders, and ask the
+  coach to review your pipeline.
 
 ---
 
@@ -123,7 +123,7 @@ DataCoach/
 ├─ ui/
 │  ├─ onboarding.py        Four-step setup wizard
 │  ├─ styles.py            Shared CSS and cards
-│  └─ pages/               Today, Coach, Progress, Settings, placeholders
+│  └─ pages/               Today, Coach, Data Lab, Interview Room, Dashboard Coach, Job Tracker, Progress, Settings
 ├─ data/                   Runtime database and logs — not in git
 ├─ dist/                   Build output — not in git
 └─ tests/                  Core logic and UI smoke tests
